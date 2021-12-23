@@ -1,31 +1,39 @@
 const main = document.querySelector(".main");
 const interval = 250;
-const time = document.querySelector(".time");
-let check = time.classList.contains('full')
+const time1 = document.querySelector(".time-1");
+const time2 = document.querySelector(".time-2");
+const time3 = document.querySelector(".time-3");
+// let check = time.classList.contains('full')
 
 class Clock {
     constructor() {
         this.clock = new Date()
+        this.formats = []
     }
 
     getTime() {
-        return this.clock.toUTCString()
+        this.formats.push(this.clock.toUTCString())
     }
 
-    render() {
+    getFormats() {
+        return this.formats
+    }
 
-        if(check) {
-            return time.innerText = this.getTime()
-        } else if(!check) {
-            return time.innerText = this.getTime()
-        } else {
-            time.innerText = this.getTime()
-        }
+    render(elem) {
+        this.getTime()
+        let formats = this.getFormats()
+        
+        formats.filter(format => {
+            if(format.includes(this.getTime())) {
+                elem.innerText = format
+            }
+        })
+
+        
+    }
         
     }
 
-
-}
 
 class Full extends Clock {
     constructor() {
@@ -36,12 +44,10 @@ class Full extends Clock {
     }
 
     getTime() {
-        return new Date().toLocaleTimeString()
+        let localString = new Date().toLocaleTimeString()
+        this.formats.push(localString)
+        return localString
     }
-
-    // render() {
-    //     time.innerText = this.getTime()
-    // }
 }
 
 class Short extends Clock {
@@ -54,14 +60,13 @@ class Short extends Clock {
     getTime() {
         if (this.hour < 10) this.hour = "0" + this.hour;
         if (this.minutes < 10) this.minutes = "0" + this.minutes;
+        
+        let shortFormat = `${this.hour}:${this.minutes}`
 
-        return `${this.hour}:${this.minutes}`
+        this.formats.push(shortFormat)
+        return shortFormat
     }
 
-    // render() {
-    //     time.innerText = this.getTime()
-    // }
-    
 }
 
 main.addEventListener('click', (e) => {
@@ -70,9 +75,16 @@ main.addEventListener('click', (e) => {
     console.log(e.target.classList)
 })
 
+
+
 setInterval(() => {
-    let clock = new Clock()
-    clock.render()
+// let clock = new Clock()
+let short = new Short()
+let full = new Full()
+
+//  clock.render(time1)
+ short.render(time2)
+ full.render(time3)
 }, interval);
 
 
