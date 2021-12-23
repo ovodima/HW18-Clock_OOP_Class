@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    height: 300px;
+    width: 300px;
+    background-image: linear-gradient(120deg, #63ee12, #e0e6da);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.time{
+ font-size: 24px;
+}
+
+.format-button {
+    height: 50px;
+    background: rgb(218, 76, 25);
+    border: none;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.format-button:hover {
+    background: rgb(105, 245, 168);
+    color: white;
+}
+
+.none {
+    display: none;
+}
