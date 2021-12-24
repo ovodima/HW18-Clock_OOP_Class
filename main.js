@@ -3,7 +3,7 @@ const interval = 250;
 const time1 = document.querySelector(".time-1");
 const time2 = document.querySelector(".time-2");
 const time3 = document.querySelector(".time-3");
-let bool = true;
+let checked = true;
 
 class Clock {
   constructor() {
@@ -12,7 +12,7 @@ class Clock {
   }
 
   getTime() {
-    this.formats.push(this.clock.toUTCString());
+    this.formats.push(this.clock.toTimeString());
   }
 
   getFormats() {
@@ -40,10 +40,11 @@ class Full extends Clock {
 
   getTime() {
     let fullTime;
-    if (!bool) {
+    if (!checked) {
       fullTime = this.clock.toLocaleTimeString();
-    } else if (bool) {
-      fullTime = `${this.hour}:${this.minutes}`;
+    } else if (checked) {
+      fullTime = this.clock.toTimeString()
+      // fullTime = `${this.hour}:${this.minutes}`;
     } else {
       return;
     }
@@ -62,9 +63,9 @@ class Short extends Clock {
   getTime() {
     let shortFormat;
 
-    if (bool) {
+    if (checked) {
       shortFormat = this.clock.toLocaleTimeString();
-    } else if (!bool) {
+    } else if (!checked) {
       if (this.hour < 10) this.hour = "0" + this.hour;
       if (this.minutes < 10) this.minutes = "0" + this.minutes;
       shortFormat = `${this.hour}:${this.minutes}`;
@@ -78,17 +79,18 @@ class Short extends Clock {
 }
 
 main.addEventListener("click", () => {
-  if (bool) {
-    bool = !bool;
+  if (checked) {
+    checked = !checked;
   } else {
-    bool = true;
+    checked = true
   }
 });
 
 setInterval(() => {
+  
   let short = new Short();
   let full = new Full();
-
+  
   short.render(time2);
   full.render(time3);
 }, interval);
