@@ -87,8 +87,6 @@ main.addEventListener("click", () => {
   }
 });
 
-
-
 setInterval(() => {
   let short = new Short();
   let full = new Full();
