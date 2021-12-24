@@ -3,7 +3,6 @@ const interval = 250;
 const time1 = document.querySelector(".time-1");
 const time2 = document.querySelector(".time-2");
 const time3 = document.querySelector(".time-3");
-// let check = main.classList.contains('full')
 let bool = true;
 
 class Clock {
@@ -79,7 +78,6 @@ class Short extends Clock {
 }
 
 main.addEventListener("click", () => {
-
   if (bool) {
     bool = !bool;
   } else {
